@@ -14,6 +14,9 @@
 (use-package evil-collection
   :config
   (setq evil-collection-setup-minibuffer t)
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file)
   :init
   (evil-collection-init))
 
