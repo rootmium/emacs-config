@@ -15,3 +15,4 @@
 (require 'root-vertico)
 (require 'root-consult)
 (require 'root-org-mode)
+(require 'root-which-key)
