@@ -11,3 +11,4 @@
 (require 'root-exec-path-from-shell)
 (require 'root-undo-tree)
 (require 'root-evil)
+(require 'root-vertico)
