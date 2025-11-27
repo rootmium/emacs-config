@@ -19,3 +19,4 @@
 (require 'root-org-mode)
 (require 'root-which-key)
 (require 'root-projectile)
+(require 'root-eglot)
