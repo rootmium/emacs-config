@@ -6,6 +6,7 @@
 (require 'root-package)
 (require 'root-base-config)
 (require 'root-custom-functions)
+(require 'root-keybinds)
 (require 'root-dired)
 
 (require 'root-base16-theme)
