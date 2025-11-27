@@ -12,3 +12,4 @@
 (require 'root-undo-tree)
 (require 'root-evil)
 (require 'root-vertico)
+(require 'root-magit)
