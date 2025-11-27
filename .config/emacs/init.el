@@ -5,3 +5,4 @@
 
 (require 'root-package)
 (require 'root-base-config)
+(require 'root-dired)
