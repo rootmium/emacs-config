@@ -1,10 +1,19 @@
 (use-package evil
   :init
-  (setq evil-want-keybinding nil)
+  (setq evil-want-keybinding nil
+        evil-split-window-below t
+        evil-vsplit-window-right t
+        evil-auto-balance-windows nil
+        evil-want-minibuffer t
+        evil-undo-system 'undo-tree)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (setq-default evil-shift-width tab-width)
+  )
 
 (use-package evil-collection
+  :config
+  (setq evil-collection-setup-minibuffer t)
   :init
   (evil-collection-init))
 
