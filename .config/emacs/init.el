@@ -16,3 +16,4 @@
 (require 'root-consult)
 (require 'root-org-mode)
 (require 'root-which-key)
+(require 'root-projectile)
