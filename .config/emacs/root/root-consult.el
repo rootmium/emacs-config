@@ -5,6 +5,7 @@
          ("C-c r" . consult-recent-file)
          ("C-c s" . consult-line)
          ("C-c /" . consult-ripgrep)
+         ("C-x b" . consult-buffer)
          )
   :init
   (setq register-preview-delay 0
