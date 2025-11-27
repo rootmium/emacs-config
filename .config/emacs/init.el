@@ -7,6 +7,7 @@
 (require 'root-base-config)
 (require 'root-dired)
 
+(require 'root-base16-theme)
 (require 'root-exec-path-from-shell)
 (require 'root-undo-tree)
 (require 'root-evil)
