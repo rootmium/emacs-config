@@ -20,6 +20,7 @@
       scroll-conservatively 101
       scroll-step 1
       scroll-margin 5
+      custom-safe-themes t
       )
 
 ;; Fix scroll margin for term-mode
