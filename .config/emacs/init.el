@@ -6,3 +6,5 @@
 (require 'root-package)
 (require 'root-base-config)
 (require 'root-dired)
+
+(require 'root-exec-path-from-shell)
