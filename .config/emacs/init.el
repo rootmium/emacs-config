@@ -14,3 +14,4 @@
 (require 'root-magit)
 (require 'root-vertico)
 (require 'root-consult)
+(require 'root-org-mode)
