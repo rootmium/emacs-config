@@ -22,6 +22,9 @@
       scroll-margin 5
       )
 
+;; Fix scroll margin for term-mode
+(add-hook 'term-mode-hook #'(lambda () (setq-local scroll-margin 0)))
+
 ;; Modes
 (savehist-mode 1)
 (column-number-mode 1)
