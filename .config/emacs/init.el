@@ -14,6 +14,7 @@
 (require 'root-undo-tree)
 (require 'root-evil)
 (require 'root-magit)
+(require 'root-git-gutter)
 (require 'root-vertico)
 (require 'root-consult)
 (require 'root-org-mode)
