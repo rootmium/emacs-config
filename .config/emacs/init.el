@@ -3,6 +3,7 @@
 ;; Load modules
 (add-to-list 'load-path "~/.config/emacs/root")
 
+(require 'root-theme)
 (require 'root-package)
 (require 'root-base-config)
 (require 'root-custom-functions)
