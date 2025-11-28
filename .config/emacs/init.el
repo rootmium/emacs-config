@@ -10,6 +10,7 @@
 (require 'root-keybinds)
 (require 'root-dired)
 
+(require 'root-doom-modeline)
 (require 'root-exec-path-from-shell)
 (require 'root-undo-tree)
 (require 'root-evil)
