@@ -1,6 +1,3 @@
-;; Load a dark theme
-(load-theme 'modus-vivendi)
-
 ;; Only ask y or n
 (defalias 'yes-or-no-p 'y-or-n-p)
 
