@@ -1,4 +1,4 @@
-(add-to-list 'default-frame-alist '(background-color . "#000000"))
+(add-to-list 'default-frame-alist '(background-color . "#121212"))
 (setq package-enable-at-statup nil)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
