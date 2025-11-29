@@ -16,6 +16,7 @@
                 c++-mode-hook
                 html-mode-hook
                 js-mode-hook
+                typescript-ts-mode-hook
                 python-mode-hook
                 css-mode-hook))
   (add-hook mode (lambda ()
