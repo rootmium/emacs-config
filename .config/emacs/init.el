@@ -15,6 +15,7 @@
 (require 'root-exec-path-from-shell)
 (require 'root-undo-tree)
 (require 'root-evil)
+(require 'root-vterm)
 (require 'root-magit)
 (require 'root-git-gutter)
 (require 'root-vertico)
