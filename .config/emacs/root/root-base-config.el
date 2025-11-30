@@ -18,6 +18,7 @@
       scroll-step 1
       scroll-margin 5
       custom-safe-themes t
+      sql-sqlite-program "/usr/bin/sqlite3"
       )
 
 ;; Fix scroll margin for term-mode
