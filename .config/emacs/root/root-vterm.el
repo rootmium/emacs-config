@@ -8,10 +8,7 @@
     (kbd "M-j") 'windmove-down)
   )
 
-;; Multiple vterm buffers in the same directory
-(use-package multi-vterm)
-
-;; Keybind for multiple vterm buffers
-(root/global-keymap "C-c t" 'multi-vterm)
+;; Keybind for vterm
+(root/global-keymap "C-c t" 'vterm)
 
 (provide 'root-vterm)
