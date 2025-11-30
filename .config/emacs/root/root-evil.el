@@ -9,7 +9,10 @@
   :config
   (evil-mode 1)
   (setq-default evil-shift-width tab-width)
+
   (evil-set-initial-state 'git-commit-mode 'insert)
+  (evil-set-initial-state 'vterm-mode 'insert)
+
   (define-key evil-normal-state-map (kbd "0") 'evil-first-non-blank)
   (define-key evil-motion-state-map (kbd "0") 'evil-first-non-blank)
   (define-key evil-visual-state-map (kbd "0") 'evil-first-non-blank)
