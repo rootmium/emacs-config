@@ -26,6 +26,10 @@
   (evil-define-key 'insert org-mode-map (kbd "M-j") 'windmove-down)
   (evil-define-key 'insert org-mode-map (kbd "M-k") 'windmove-up)
   (evil-define-key 'insert org-mode-map (kbd "M-l") 'windmove-right)
+
+  (evil-define-key 'insert minibuffer-local-map (kbd "C-n") 'next-line-or-history-element)
+  (evil-define-key 'insert minibuffer-local-map (kbd "C-p") 'previous-line-or-history-element)
+  
   (evil-define-key 'normal dired-mode-map
     "h" 'dired-up-directory
     "l" 'dired-find-file)
