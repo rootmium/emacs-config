@@ -1,4 +1,5 @@
 (use-package eldoc-box)
+(use-package markdown-mode)
 (use-package eglot
   :ensure nil
   :config
