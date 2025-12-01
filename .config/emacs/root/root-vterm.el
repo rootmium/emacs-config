@@ -1,5 +1,8 @@
 (use-package vterm
   :config
+  ;; Send next key to vterm
+  (define-key vterm-mode-map (kbd "C-q") #'vterm-send-next-key)
+  
   (evil-define-key 'insert vterm-mode-map
     ;; Switch windows in insert mode
     (kbd "M-h") 'windmove-left
@@ -17,6 +20,10 @@
     (kbd "C-p") #'vterm--self-insert
     (kbd "C-r") #'vterm--self-insert
     (kbd "C-t") #'vterm--self-insert
+    
+    ;; Send next key to vterm
+    (kbd "C-q") #'vterm-send-next-key
+    )
   )
 
 ;; Keybind for vterm
