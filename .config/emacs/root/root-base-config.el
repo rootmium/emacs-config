@@ -63,4 +63,8 @@
 ;; Start typescript mode in .ts files
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 
+;; Set transparency
+(set-frame-parameter (selected-frame) 'alpha-background 93)
+(add-to-list 'default-frame-alist '(alpha-background . 93))
+
 (provide 'root-base-config)
