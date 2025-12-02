@@ -13,7 +13,6 @@
 (require 'root-doom-modeline)
 (require 'root-exec-path-from-shell)
 (require 'root-undo-tree)
-(require 'root-evil)
 (require 'root-diff-hl)
 (require 'root-vterm)
 (require 'root-magit)
