@@ -22,6 +22,7 @@
 (require 'root-which-key)
 (require 'root-projectile)
 (require 'root-eglot)
+(require 'root-corfu)
 
 ;; Disable context menu
 (context-menu-mode -1)
