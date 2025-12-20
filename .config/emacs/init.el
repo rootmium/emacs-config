@@ -21,5 +21,7 @@
 (require 'root-corfu)
 (require 'root-prettier)
 
+(require 'root-rjsx)
+
 ;; Disable context menu
 (context-menu-mode -1)
