@@ -16,6 +16,8 @@
 (require 'root-vertico)
 (require 'root-consult)
 (require 'root-org-mode)
+
+(require 'root-eglot)
 (require 'root-corfu)
 
 ;; Disable context menu
