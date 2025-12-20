@@ -19,6 +19,7 @@
 
 (require 'root-eglot)
 (require 'root-corfu)
+(require 'root-prettier)
 
 ;; Disable context menu
 (context-menu-mode -1)
