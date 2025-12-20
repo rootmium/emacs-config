@@ -10,19 +10,12 @@
 (require 'root-keybinds)
 (require 'root-dired)
 
-(require 'root-base16-theme)
-(require 'root-doom-modeline)
 (require 'root-exec-path-from-shell)
 (require 'root-undo-fu)
-(require 'root-evil)
-(require 'root-diff-hl)
-(require 'root-vterm)
 (require 'root-magit)
 (require 'root-vertico)
 (require 'root-consult)
 (require 'root-org-mode)
-(require 'root-which-key)
-(require 'root-projectile)
 (require 'root-corfu)
 
 ;; Disable context menu
