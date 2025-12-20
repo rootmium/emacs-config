@@ -3,10 +3,9 @@
 (use-package eglot
   :ensure nil
   :config
-  (setq eglot-events-buffer-size 0
-        eglot-autoshutdown t
-        eglot-send-changes-idle-time 0.5
-        read-process-output-max (* 1024 1024))
+  (setq eglot-autoshutdown t
+        eglot-send-changes-idle-time nil
+        )
   )
 
 (setq js-indent-level 2
