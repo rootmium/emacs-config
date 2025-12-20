@@ -67,4 +67,7 @@
 (set-frame-parameter (selected-frame) 'alpha-background 93)
 (add-to-list 'default-frame-alist '(alpha-background . 93))
 
+;; Projects dir
+(project-remember-projects-under "~/Projects/" t)
+
 (provide 'root-base-config)
