@@ -1,4 +1,5 @@
 (add-to-list 'default-frame-alist '(background-color . "#121212"))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq package-enable-at-statup nil)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
