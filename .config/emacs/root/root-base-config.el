@@ -30,6 +30,7 @@
 (global-auto-revert-mode 1)
 (recentf-mode 1)
 (save-place-mode 1)
+(which-key-mode 1)
 
 ;; Special modes for programming and writing
 (dolist (mode '(text-mode-hook
