@@ -16,6 +16,7 @@
 (require 'root-vertico)
 (require 'root-consult)
 (require 'root-org-mode)
+(require 'root-openwith)
 
 (require 'root-eglot)
 (require 'root-corfu)
