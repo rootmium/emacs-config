@@ -14,6 +14,7 @@
 (require 'root-exec-path-from-shell)
 (require 'root-undo-fu)
 (require 'root-magit)
+(require 'root-diff-hl)
 (require 'root-vertico)
 (require 'root-consult)
 (require 'root-org-mode)
