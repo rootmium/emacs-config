@@ -71,4 +71,22 @@
 (require 'project)
 (project-remember-projects-under "~/Projects/" t)
 
+;; Exclude file and directories from recentf list
+(setq recentf-exclude '("/tmp/"
+                        "/ssh:"
+                        "/sudo:"
+                        "recentf$"
+                        "\\.mkv$"
+                        "\\.webm$"
+                        "\\.webp$"
+                        "\\.mp[34]$"
+                        "\\.avi$"
+                        "\\.pdf$"
+                        "\\.png$"
+                        "\\.jpg$"
+                        "\\.sub$"
+                        "\\.srt$"
+                        "/run/media"
+                        ))
+
 (provide 'root-base-config)
