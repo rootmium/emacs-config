@@ -4,6 +4,7 @@
 (add-to-list 'load-path "~/.config/emacs/root")
 
 (require 'root-theme)
+(require 'root-modeline)
 (require 'root-package)
 (require 'root-base-config)
 (require 'root-custom-functions)
