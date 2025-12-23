@@ -6,7 +6,7 @@
                 '("mpg" "mpeg" "mp3" "mp4"
                   "avi" "wmv" "wav" "mov" "flv"
                   "ogm" "ogg" "mkv"))
-               "mpv --audio-display=embedded-first"
+               "mpv"
                '(file))
          (list (openwith-make-extension-regexp
                 '("xbm" "pbm" "pgm" "ppm" "pnm"
