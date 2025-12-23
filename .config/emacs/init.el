@@ -1,5 +1,11 @@
 ;; -*- lexical-binding: t; -*-
 
+;; Load custom functions
+(add-to-list 'load-path "~/.config/emacs/root-functions")
+
+;; Custom functions
+(require 'root-fn-miscellaneous)
+
 ;; Load modules
 (add-to-list 'load-path "~/.config/emacs/root-modules")
 

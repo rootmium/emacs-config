@@ -43,4 +43,4 @@ The URL is saved to the clipboard upon completion"
     (process-put (get-process "0x0-upload") :output-buffer process-buffer)
     nil))
 
-(provide 'root-custom-functions)
+(provide 'root-fn-miscellaneous)
