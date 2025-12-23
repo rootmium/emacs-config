@@ -10,14 +10,15 @@
 ;; Load modules
 (add-to-list 'load-path "~/.config/emacs/root-modules")
 
+;; Modules with no external packages
 (require 'root-theme)
 (require 'root-modeline)
 (require 'root-package)
 (require 'root-base-config)
-(require 'root-custom-functions)
 (require 'root-keybinds)
 (require 'root-dired)
 
+;; Modues with external packages
 (require 'root-exec-path-from-shell)
 (require 'root-undo-fu)
 (require 'root-magit)
@@ -27,10 +28,12 @@
 (require 'root-org-mode)
 (require 'root-openwith)
 
+;; Language feature related
 (require 'root-eglot)
 (require 'root-corfu)
 (require 'root-prettier)
 
+;; Specific language modules
 (require 'root-rjsx)
 
 ;; Disable context menu
