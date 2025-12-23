@@ -5,6 +5,7 @@
 
 ;; Custom functions
 (require 'root-fn-miscellaneous)
+(require 'root-fn-aria2)
 
 ;; Load modules
 (add-to-list 'load-path "~/.config/emacs/root-modules")
