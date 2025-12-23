@@ -66,3 +66,11 @@ Returns a message if no player is active."
     (if (string-empty-p (string-trim title))
         (message "No media playing")
       (message "Now playing: %s" (string-trim title)))))
+
+(defun root/stop-media-player ()
+  "Stop the current media player using playerctl."
+  (interactive)
+  (let ((output (shell-command-to-string "playerctl stop")))
+    (if (string-empty-p (string-trim output))
+        (message "Player stopped")
+      (message "No media playing"))))
