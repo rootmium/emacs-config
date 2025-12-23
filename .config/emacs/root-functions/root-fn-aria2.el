@@ -2,6 +2,10 @@
 (require 'notifications)
 
 (defun root/aria2-process-filter (process output)
+  "Filter for aria2 PROCESS to handle progress bars and ANSI colors.
+It handles carriage returns (\r) by deleting the current line to
+simulate a refreshing progress bar in the buffer. OUTPUT is the
+string received from the process."
   (let ((buf (process-buffer process)))
     (when (buffer-live-p buf)
       (with-current-buffer buf
@@ -15,6 +19,9 @@
             (set-marker pmark (point))))))))
 
 (defun root/aria2-sentinel (process event)
+  "Sentinel for aria2 PROCESS to handle notifications on EVENT.
+Triggers a desktop notification via `notifications-notify' when the
+PROCESS finishes or fails, and logs the exit status to the progress buffer."
   (when (memq (process-status process) '(exit signal))
     (let ((status (if (string-match-p "finished" event)
                       "Download Complete!"
@@ -30,6 +37,9 @@
       (insert (format "\n--- Process %s ---\n" (string-trim event))))))
 
 (defun root/aria2--run-process (buffer args)
+  "Internal helper to start the aria2 process.
+Starts 'aria2c' using ARGS, outputting to BUFFER. Sets up the
+custom filter and sentinel for progress tracking and notifications."
   (with-current-buffer buffer
     (setq-local window-point-insertion-type t)
     (display-buffer buffer))
@@ -39,6 +49,8 @@
     (message "Aria2 Download Started...")))
 
 (defun root/aria2 (url dest-dir file-name)
+  "Download URL to DEST-DIR as FILE-NAME using aria2.
+If FILE-NAME is empty, aria2 will determine the filename from the URL."
   (interactive
    (list (read-string "URL: ")
          (read-directory-name "Download directory: " "~/Downloads/")
@@ -52,6 +64,8 @@
     (root/aria2--run-process buffer args)))
 
 (defun root/aria2-batch (input-file dest-dir)
+  "Download multiple URLs from the INPUT-FILE to DEST-DIR using aria2.
+INPUT-FILE should be a text file containing one URL per line."
   (interactive
    (list (read-file-name "URL file: ")
          (read-directory-name "Download directory: " "~/Downloads/")))
