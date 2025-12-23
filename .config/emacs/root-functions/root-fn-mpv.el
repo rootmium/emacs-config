@@ -56,3 +56,13 @@ This function performs two actions:
   (let ((dir-path (expand-file-name dir)))
     (make-comint-in-buffer "mpv-shuffle" "*mpv-output*" "mpv" nil "--shuffle" dir-path)
     (message "Starting mpv shuffle in %s..." dir)))
+
+(defun root/get-current-media-title ()
+  "Fetch the currently playing media title using playerctl.
+
+Returns a message if no player is active."
+  (interactive)
+  (let ((title (shell-command-to-string "playerctl metadata --format '{{title}}' 2>/dev/null")))
+    (if (string-empty-p (string-trim title))
+        (message "No media playing")
+      (message "Now playing: %s" (string-trim title)))))
