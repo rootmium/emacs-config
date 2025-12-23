@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 ;; Load modules
-(add-to-list 'load-path "~/.config/emacs/root")
+(add-to-list 'load-path "~/.config/emacs/root-modules")
 
 (require 'root-theme)
 (require 'root-modeline)
