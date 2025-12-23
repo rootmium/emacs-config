@@ -1,3 +1,7 @@
+(defgroup root/custom nil
+  "Variables for custom functions."
+  :group 'external)
+
 (defun root/global-keymap (&rest k+c)
   "Set global keymaps"
   (let (key cmd)
