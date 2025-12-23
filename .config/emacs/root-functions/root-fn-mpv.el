@@ -1,3 +1,4 @@
+(require 'comint)
 (defcustom root/mpv-config-path "~/.config/mpv/mpv.conf"
   "Path to the mpv configuration file."
   :type 'file
@@ -48,3 +49,10 @@ This function performs two actions:
 
     (shell-command (concat "playerctl --player=mpv volume " float-vol))
     (message "Mpv volume set to %d (config and playerctl)" volume)))
+
+(defun root/mpv-shuffle-dir (dir)
+  "Launch mpv in a comint buffer to play files in DIR in shuffle mode."
+  (interactive "DSelect directory to play: ")
+  (let ((dir-path (expand-file-name dir)))
+    (make-comint-in-buffer "mpv-shuffle" "*mpv-output*" "mpv" nil "--shuffle" dir-path)
+    (message "Starting mpv shuffle in %s..." dir)))
