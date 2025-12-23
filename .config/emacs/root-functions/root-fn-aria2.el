@@ -3,6 +3,7 @@
 
 (defun root/aria2-sentinel (process event)
   "Sentinel for aria2 PROCESS to handle notifications on EVENT.
+
 Triggers a desktop notification via `notifications-notify' when the
 PROCESS finishes or fails, and shows a `message' in the minibuffer"
   (when (memq (process-status process) '(exit signal))
@@ -19,6 +20,7 @@ PROCESS finishes or fails, and shows a `message' in the minibuffer"
 
 (defun root/aria2--run-process (buffer args)
   "Internal helper to start the aria2 process.
+
 Starts 'aria2c' using ARGS, outputting to BUFFER. If BUFFER does not
 exist, it is created and set to `comint-mode`. Sets up the sentinel
 for notifications."
@@ -38,6 +40,7 @@ for notifications."
 
 (defun root/aria2 (url dest-dir file-name)
   "Download URL to DEST-DIR as FILE-NAME using aria2.
+
 If FILE-NAME is empty, aria2 will determine the filename from the URL."
   (interactive
    (list (read-string "URL: ")
@@ -53,6 +56,7 @@ If FILE-NAME is empty, aria2 will determine the filename from the URL."
 
 (defun root/aria2-batch (input-file dest-dir)
   "Download multiple URLs from the INPUT-FILE to DEST-DIR using aria2.
+
 INPUT-FILE should be a text file containing one URL per line."
   (interactive
    (list (read-file-name "URL file: ")
