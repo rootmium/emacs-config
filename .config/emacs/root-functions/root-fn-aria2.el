@@ -1,27 +1,10 @@
-(require 'ansi-color)
+(require 'comint)
 (require 'notifications)
-
-(defun root/aria2-process-filter (process output)
-  "Filter for aria2 PROCESS to handle progress bars and ANSI colors.
-It handles carriage returns (\r) by deleting the current line to
-simulate a refreshing progress bar in the buffer. OUTPUT is the
-string received from the process."
-  (let ((buf (process-buffer process)))
-    (when (buffer-live-p buf)
-      (with-current-buffer buf
-        (let ((pmark (process-mark process)))
-          (save-excursion
-            (goto-char pmark)
-            (when (string-match "\r" output)
-              (delete-region (line-beginning-position) (point))
-              (setq output (replace-regexp-in-string "\r" " " output)))
-            (insert (ansi-color-apply output))
-            (set-marker pmark (point))))))))
 
 (defun root/aria2-sentinel (process event)
   "Sentinel for aria2 PROCESS to handle notifications on EVENT.
 Triggers a desktop notification via `notifications-notify' when the
-PROCESS finishes or fails, and logs the exit status to the progress buffer."
+PROCESS finishes or fails, and shows a `message' in the minibuffer"
   (when (memq (process-status process) '(exit signal))
     (let ((status (if (string-match-p "finished" event)
                       "Download Complete!"
@@ -31,22 +14,27 @@ PROCESS finishes or fails, and logs the exit status to the progress buffer."
        :body (format "%s\nProcess %s" status event)
        :urgency 'normal
        :app-name "Emacs"))
-    (message "Aria2 process: %s" (string-trim event))
-    (with-current-buffer (process-buffer process)
-      (goto-char (point-max))
-      (insert (format "\n--- Process %s ---\n" (string-trim event))))))
+    (message "Aria2 process: %s" (string-trim event))))
+
 
 (defun root/aria2--run-process (buffer args)
   "Internal helper to start the aria2 process.
-Starts 'aria2c' using ARGS, outputting to BUFFER. Sets up the
-custom filter and sentinel for progress tracking and notifications."
-  (with-current-buffer buffer
-    (setq-local window-point-insertion-type t)
-    (display-buffer buffer))
-  (let ((proc (apply 'start-process "aria2-process" buffer "aria2c" args)))
-    (set-process-filter proc 'root/aria2-process-filter)
-    (set-process-sentinel proc 'root/aria2-sentinel)
-    (message "Aria2 Download Started...")))
+Starts 'aria2c' using ARGS, outputting to BUFFER. If BUFFER does not
+exist, it is created and set to `comint-mode`. Sets up the sentinel
+for notifications."
+  (let ((buf (get-buffer-create buffer)))
+    (with-current-buffer buf
+      (unless (derived-mode-p 'comint-mode)
+        (comint-mode)
+        (setq-local comint-inhibit-carriage-motion nil))
+      (let ((proc (get-buffer-process buf)))
+        (if (and proc (process-live-p proc))
+            (error "An aria2 process is already running in %s" buffer-name)
+          (apply 'make-comint-in-buffer "aria2-process" buf "aria2c" nil args)
+          (set-process-sentinel (get-buffer-process buf) 'root/aria2-sentinel)
+          (display-buffer buf)
+          (message "Aria2 sownload started...")))))
+)
 
 (defun root/aria2 (url dest-dir file-name)
   "Download URL to DEST-DIR as FILE-NAME using aria2.
