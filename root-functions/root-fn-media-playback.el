@@ -89,7 +89,7 @@ before starting the new one."
         (progn
           (root/mpv-stop)
           (message "Playing: %s" (file-name-nondirectory selected-file))
-          (start-process root/mpv--process-name nil "mpv" (expand-file-name selected-file)))
+          (make-comint-in-buffer root/mpv--process-name root/mpv--buffer-name "mpv" nil (expand-file-name selected-file)))
       (message "No file selected."))))
 
 (defun root/playerctl-title ()
