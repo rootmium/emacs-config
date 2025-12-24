@@ -132,7 +132,7 @@ and start a new process to play the URL."
 
 Returns a message if no player is active."
   (interactive)
-  (let ((title (shell-command-to-string "playerctl metadata --format '{{title}}' 2>/dev/null")))
+  (let ((title (root/playerctl-mpv-command "metadata --format '{{title}}' 2>/dev/null")))
     (if (string-empty-p (string-trim title))
         (message "No media playing.")
       (message "Now playing: %s" (string-trim title)))))
