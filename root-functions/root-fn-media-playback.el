@@ -14,6 +14,9 @@
 (defvar root/mpv--process-name "mpv-player"
   "Internal name used for mpv process.")
 
+(defvar root/mpv--buffer-name " *mpv-output*"
+  "Internal name used for mpv buffer.")
+
 (defun root/mpv-get-volume ()
   "Return the current mpv volume as in integer.
 
