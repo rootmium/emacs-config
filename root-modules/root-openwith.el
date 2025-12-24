@@ -10,7 +10,7 @@
                '(file))
          (list (openwith-make-extension-regexp
                 '("xbm" "pbm" "pgm" "ppm" "pnm"
-                  "png" "gif" "bmp" "tif" "jpeg" "jpg"))
+                  "png" "gif" "bmp" "tif" "jpeg" "jpg" "webp"))
                "gwenview"
                '(file))
          (list (openwith-make-extension-regexp
