@@ -6,6 +6,7 @@
 ;; Custom functions
 (require 'root-fn-miscellaneous)
 (require 'root-fn-aria2)
+(require 'root-fn-media-playback)
 
 ;; Load modules
 (add-to-list 'load-path "~/.config/emacs/root-modules")

@@ -116,3 +116,5 @@ before starting the new one."
           (message "Playing: %s" (file-name-nondirectory selected-file))
           (start-process root/mpv--process-name nil "mpv" (expand-file-name selected-file)))
       (message "No file selected"))))
+
+(provide 'root-fn-media-playback)
