@@ -4,6 +4,11 @@
   :type 'file
   :group 'root/custom)
 
+(defcustom root/music-directory "~/Others/Music/"
+  "Default directory to look for music"
+  :type 'directory
+  :group 'root/custom)
+
 (defun root/get-mpv-volume ()
   "Return the current mpv volume as in integer.
 
