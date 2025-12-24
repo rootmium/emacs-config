@@ -192,6 +192,10 @@ found, it attempts to stop an external instance via
    ("v" "Volume" root/mpv-set-volume)
    ("f" "Forward" root/mpv-seek-forward)
    ("r" "Rewind" root/mpv-seek-rewind)
+   ]
+  ["Others"
+   ("u" "Play/Pause" root/playerctl-play-pause)
+   ("k" "Stop" root/playerctl-stopm)
    ]])
 
 (provide 'root-fn-media-playback)
