@@ -58,6 +58,18 @@ This function performs two actions:
     (shell-command (concat "playerctl --player=mpv volume " float-vol))
     (message "Mpv volume set to %d (config and playerctl)" volume)))
 
+(defun root/stop-mpv ()
+  "Stop the running mpv process if it exists.
+
+This function checks for a process named `root/mpv--process-name'
+and deletes it if found."
+  (interactive)
+  (if (get-process root/mpv--process-name)
+      (progn
+        (delete-process root/mpv--process-name)
+        (message "Mpv stopped."))
+    (message "No mpv process is running.")))
+
 (defun root/mpv-shuffle-dir (dir)
   "Launch mpv in a comint buffer to play files in DIR in shuffle mode."
   (interactive "DSelect directory to play: ")
