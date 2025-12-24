@@ -12,7 +12,7 @@
 (defvar root/mpv--process-name "mpv-player"
   "Internal name used for mpv process.")
 
-(defun root/get-mpv-volume ()
+(defun root/mpv-get-volume ()
   "Return the current mpv volume as in integer.
 
 The volume is determined in the following order of priority:
@@ -32,7 +32,7 @@ The volume is determined in the following order of priority:
           100)))
      (t 100))))
 
-(defun root/set-mpv-volume (volume)
+(defun root/mpv-set-volume (volume)
   "Set the mpv VOLUME in both the config file and the running player.
 
 VOLUME should be an integer (e.g., 50 for 50%)
@@ -40,7 +40,7 @@ VOLUME should be an integer (e.g., 50 for 50%)
 This function performs two actions:
 1. Updates or appends the 'volume=' key in `root/mpv-config-path'.
 2. Uses 'playerctl' to set volume of the running mpv instance."
-  (interactive (list (read-number "Set mpv volume: " (root/get-mpv-volume))))
+  (interactive (list (read-number "Set mpv volume: " (root/mpv-get-volume))))
   (let* ((conf-file (expand-file-name root/mpv-config-path))
         (vol (format "volume=%d" volume))
         (float-vol (number-to-string (/ volume 100.0))))
@@ -58,7 +58,6 @@ This function performs two actions:
     (shell-command (concat "playerctl --player=mpv volume " float-vol))
     (message "Mpv volume set to %d (config and playerctl)" volume)))
 
-(defun root/stop-mpv ()
   "Stop the running mpv process if it exists.
 
 This function checks for a process named `root/mpv--process-name'
@@ -74,15 +73,32 @@ and deletes it if found."
   "Launch mpv in a comint buffer to play files in DIR in shuffle mode.
 
 This function uses `root/music-directory' as base path. Any existing mpv
-process is killed with `root/stop-mpv' before starting the new one."
+process is killed with `root/mpv-stop' before starting the new one."
   (interactive
    (list (read-directory-name "Select directory to play: " root/music-directory)))
   (let ((dir-path (expand-file-name dir)))
-    (root/stop-mpv)
+    (root/mpv-stop)
     (make-comint-in-buffer root/mpv--process-name "*mpv-output*" "mpv" nil "--shuffle" dir-path)
     (message "Starting mpv shuffle in %s..." dir)))
 
-(defun root/get-current-media-title ()
+(defun root/mpv-play-file ()
+  "Prompt for a file in `root/music-directory' and play it using mpv.
+
+Recursively searches for files in the selected subdirectory. If a file
+is selected, any existing mpv process is killed with `root/mpv-stop'
+before starting the new one."
+  (interactive)
+  (let* ((target-dir (read-directory-name "Select directory: " root/music-directory))
+         (files (directory-files-recursively target-dir "" nil))
+         (selected-file (completing-read "Select file to play: " files nil t)))
+    (if (and selected-file (file-exists-p selected-file))
+        (progn
+          (root/mpv-stop)
+          (message "Playing: %s" (file-name-nondirectory selected-file))
+          (start-process root/mpv--process-name nil "mpv" (expand-file-name selected-file)))
+      (message "No file selected"))))
+
+(defun root/playerctl-title ()
   "Fetch the currently playing media title using playerctl.
 
 Returns a message if no player is active."
@@ -92,7 +108,7 @@ Returns a message if no player is active."
         (message "No media playing")
       (message "Now playing: %s" (string-trim title)))))
 
-(defun root/stop-media-player ()
+(defun root/playerctl-stop ()
   "Stop the current media player using playerctl."
   (interactive)
   (let ((output (shell-command-to-string "playerctl stop")))
@@ -100,21 +116,20 @@ Returns a message if no player is active."
         (message "Player stopped")
       (message "No media playing"))))
 
-(defun root/play-with-mpv ()
-  "Prompt for a file in `root/music-directory' and play it using mpv.
-
-Recursively searches for files in the selected subdirectory. If a file
-is selected, any existing mpv process is killed with `root/stop-mpv'
-before starting the new one."
+(defun root/playerctl-play-pause ()
+  "Play or pause the current media player using playerctl."
   (interactive)
-  (let* ((target-dir (read-directory-name "Select directory: " root/music-directory))
-         (files (directory-files-recursively target-dir "" nil))
-         (selected-file (completing-read "Select file to play: " files nil t)))
-    (if (and selected-file (file-exists-p selected-file))
-        (progn
-          (root/stop-mpv)
-          (message "Playing: %s" (file-name-nondirectory selected-file))
-          (start-process root/mpv--process-name nil "mpv" (expand-file-name selected-file)))
-      (message "No file selected"))))
+  (let ((output (shell-command-to-string "playerctl play-pause")))
+    (if (string-empty-p (string-trim output))
+        (message "Player paused")
+      (message "No media playing"))))
+
+(defun root/playerctl-mpv-command (args)
+  "Helper to run playerctl commands for mpv with ARGS."
+  (let ((cmd (concat "playerctl --player=mpv " args)))
+    (shell-command-to-string cmd)))
+
+(defun root/mpv-stop ()
+  (interactive)
 
 (provide 'root-fn-media-playback)
