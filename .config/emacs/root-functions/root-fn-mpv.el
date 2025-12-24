@@ -99,3 +99,20 @@ Returns a message if no player is active."
     (if (string-empty-p (string-trim output))
         (message "Player stopped")
       (message "No media playing"))))
+
+(defun root/play-with-mpv ()
+  "Prompt for a file in `root/music-directory' and play it using mpv.
+
+Recursively searches for files in the selected subdirectory. If a file
+is selected, any existing mpv process is killed with `root/stop-mpv'
+before starting the new one."
+  (interactive)
+  (let* ((target-dir (read-directory-name "Select directory: " root/music-directory))
+         (files (directory-files-recursively target-dir "" nil))
+         (selected-file (completing-read "Select file to play: " files nil t)))
+    (if (and selected-file (file-exists-p selected-file))
+        (progn
+          (root/stop-mpv)
+          (message "Playing: %s" (file-name-nondirectory selected-file))
+          (start-process root/mpv--process-name nil "mpv" (expand-file-name selected-file)))
+      (message "No file selected"))))
