@@ -1,4 +1,6 @@
 (require 'comint)
+(require 'transient)
+
 (defcustom root/mpv-config-path "~/.config/mpv/mpv.conf"
   "Path to the mpv configuration file."
   :type 'file
@@ -172,5 +174,24 @@ found, it attempts to stop an external instance via
     (if (string-empty-p (string-trim output))
         (message "Rewind 10 seconds")
       (message "No media playing."))))
+
+(transient-define-prefix root/mpv-menu ()
+  "Transient menu for controlling mpv via playerctl"
+  [:description (lambda () (root/playerctl-title))
+  ["Open"
+   ("o" "Open" root/mpv-play-file)
+   ("z" "Shuffle" root/mpv-shuffle-dir)
+   ]
+  ["Navigation"
+   ("SPC" "Play/Pause" root/mpv-play-pause)
+   ("s" "Stop" root/mpv-stop)
+   ("n" "Next" root/mpv-next)
+   ("p" "Previous" root/mpv-previous)
+   ]
+  ["Volume/Seek"
+   ("v" "Volume" root/mpv-set-volume)
+   ("f" "Forward" root/mpv-seek-forward)
+   ("r" "Rewind" root/mpv-seek-rewind)
+   ]])
 
 (provide 'root-fn-media-playback)
