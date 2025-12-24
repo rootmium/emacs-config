@@ -21,8 +21,10 @@ then switch back to `term-char-mode'"
 
 ;; Upload selected file to 0x0
 (defun root/upload-to-0x0 ()
-  "Upload file to 0x0.st
-The URL is saved to the clipboard upon completion"
+  "Upload a file to 0x0.st via curl and copy the URL to the kill ring.
+
+Prompts for a file, uploads it asynchronously with a 24-hour
+expiration, and messages the resulting URL upon completion."
   (interactive)
   (let* ((file (expand-file-name (read-file-name "File to upload: ")))
          (file-name (file-name-nondirectory file))
