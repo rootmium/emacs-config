@@ -106,16 +106,6 @@ and start a new process to play the URL."
       (make-comint-in-buffer root/mpv--process-name root/mpv--buffer-name "mpv" nil url)
       )))
 
-(defun root/playerctl-title ()
-  "Fetch the currently playing media title using playerctl.
-
-Returns a message if no player is active."
-  (interactive)
-  (let ((title (shell-command-to-string "playerctl metadata --format '{{title}}' 2>/dev/null")))
-    (if (string-empty-p (string-trim title))
-        (message "No media playing.")
-      (message "Now playing: %s" (string-trim title)))))
-
 (defun root/playerctl-stop ()
   "Stop the current media player using playerctl."
   (interactive)
@@ -136,6 +126,16 @@ Returns a message if no player is active."
   "Helper to run playerctl commands for mpv with ARGS."
   (let ((cmd (concat "playerctl --player=mpv " args)))
     (shell-command-to-string cmd)))
+
+(defun root/mpv-title ()
+  "Fetch the currently playing mpv media title using playerctl.
+
+Returns a message if no player is active."
+  (interactive)
+  (let ((title (shell-command-to-string "playerctl metadata --format '{{title}}' 2>/dev/null")))
+    (if (string-empty-p (string-trim title))
+        (message "No media playing.")
+      (message "Now playing: %s" (string-trim title)))))
 
 (defun root/mpv-stop ()
   "Stop the running mpv process and clear any active playback.
@@ -165,7 +165,7 @@ found, it attempts to stop an external instance via
   (interactive)
   (let ((output (root/playerctl-mpv-command "next")))
     (if (string-empty-p (string-trim output))
-        (message (root/playerctl-title))
+        (message (root/mpv-title))
       (message "No media playing."))))
 
 (defun root/mpv-previous ()
@@ -173,7 +173,7 @@ found, it attempts to stop an external instance via
   (interactive)
   (let ((output (root/playerctl-mpv-command "previous")))
     (if (string-empty-p (string-trim output))
-        (message (root/playerctl-title))
+        (message (root/mpv-title))
       (message "No media playing."))))
 
 (defun root/mpv-seek-forward ()
@@ -194,7 +194,7 @@ found, it attempts to stop an external instance via
 
 (transient-define-prefix root/mpv-menu ()
   "Transient menu for controlling mpv via playerctl"
-  [:description (lambda () (root/playerctl-title))
+  [:description (lambda () (root/mpv-title))
   ["Open"
    ("o" "Open" root/mpv-play-file)
    ("z" "Shuffle" root/mpv-shuffle-dir)
