@@ -35,7 +35,7 @@ for notifications."
           (apply 'make-comint-in-buffer "aria2-process" buf "aria2c" nil args)
           (set-process-sentinel (get-buffer-process buf) 'root/aria2-sentinel)
           (display-buffer buf)
-          (message "Aria2 sownload started...")))))
+          (message "Aria2 download started...")))))
 )
 
 (defun root/aria2 (url dest-dir file-name)
