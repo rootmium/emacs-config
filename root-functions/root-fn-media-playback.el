@@ -133,6 +133,12 @@ found, it attempts to stop an external instance via
          (message "Mpv stopped"))
     (t (message "No mpv process is running."))))
 
+(defun root/mpv-play-pause ()
+  "Play or pause mpv using playerctl."
   (interactive)
+  (let ((output (root/playerctl-mpv-command "play-pause")))
+    (if (string-empty-p (string-trim output))
+        (message "Mpv paused")
+      (message "No media playing"))))
 
 (provide 'root-fn-media-playback)
