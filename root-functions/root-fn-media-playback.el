@@ -195,7 +195,7 @@ found, it attempts to stop an external instance via
    ]
   ["Others"
    ("u" "Play/Pause" root/playerctl-play-pause)
-   ("k" "Stop" root/playerctl-stopm)
+   ("k" "Stop" root/playerctl-stop)
    ]])
 
 (provide 'root-fn-media-playback)
