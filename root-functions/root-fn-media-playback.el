@@ -141,4 +141,36 @@ found, it attempts to stop an external instance via
         (message "Mpv paused.")
       (message "No media playing."))))
 
+(defun root/mpv-next ()
+  "Play next media in the playlist using playerctl."
+  (interactive)
+  (let ((output (root/playerctl-mpv-command "next")))
+    (if (string-empty-p (string-trim output))
+        (message (root/playerctl-title))
+      (message "No media playing."))))
+
+(defun root/mpv-previous ()
+  "Play previous media in the playlist using playerctl."
+  (interactive)
+  (let ((output (root/playerctl-mpv-command "previous")))
+    (if (string-empty-p (string-trim output))
+        (message (root/playerctl-title))
+      (message "No media playing."))))
+
+(defun root/mpv-seek-forward ()
+  "Seek forward 10 seconds using playerctl."
+  (interactive)
+  (let ((output (root/playerctl-mpv-command "position 10+")))
+    (if (string-empty-p (string-trim output))
+        (message "Forward 10 seconds")
+      (message "No media playing."))))
+
+(defun root/mpv-seek-rewind ()
+  "Rewind 10 seconds using playerctl."
+  (interactive)
+  (let ((output (root/playerctl-mpv-command "position 10-")))
+    (if (string-empty-p (string-trim output))
+        (message "Rewind 10 seconds")
+      (message "No media playing."))))
+
 (provide 'root-fn-media-playback)
