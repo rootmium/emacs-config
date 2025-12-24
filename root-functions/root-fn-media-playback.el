@@ -198,6 +198,7 @@ found, it attempts to stop an external instance via
   ["Open"
    ("o" "Open" root/mpv-play-file)
    ("z" "Shuffle" root/mpv-shuffle-dir)
+   ("u" "URL" root/mpv-play-url)
    ]
   ["Navigation"
    ("SPC" "Play/Pause" root/mpv-play-pause)
