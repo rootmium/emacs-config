@@ -211,8 +211,8 @@ found, it attempts to stop an external instance via
    ("r" "Rewind" root/mpv-seek-rewind)
    ]
   ["Others"
-   ("u" "Play/Pause" root/playerctl-play-pause)
-   ("k" "Stop" root/playerctl-stop)
+   ("P" "Play/Pause" root/playerctl-play-pause)
+   ("S" "Stop" root/playerctl-stop)
    ]])
 
 (provide 'root-fn-media-playback)
