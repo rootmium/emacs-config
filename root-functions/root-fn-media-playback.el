@@ -72,7 +72,7 @@ process is killed with `root/mpv-stop' before starting the new one."
    (list (read-directory-name "Select directory to play: " root/music-directory)))
   (let ((dir-path (expand-file-name dir)))
     (root/mpv-stop)
-    (make-comint-in-buffer root/mpv--process-name "*mpv-output*" "mpv" nil "--shuffle" dir-path)
+    (make-comint-in-buffer root/mpv--process-name root/mpv--buffer-name "mpv" nil "--shuffle" dir-path)
     (message "Starting mpv shuffle in %s..." dir)))
 
 (defun root/mpv-play-file ()
