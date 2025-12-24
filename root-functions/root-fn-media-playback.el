@@ -56,7 +56,7 @@ This function performs two actions:
         (insert vol "\n")))
 
     (shell-command (concat "playerctl --player=mpv volume " float-vol))
-    (message "Mpv volume set to %d (config and playerctl)" volume)))
+    (message "Mpv volume set to %d (config and playerctl)." volume)))
 
 (defun root/mpv-shuffle-dir (dir)
   "Launch mpv in a comint buffer to play files in DIR in shuffle mode.
@@ -85,7 +85,7 @@ before starting the new one."
           (root/mpv-stop)
           (message "Playing: %s" (file-name-nondirectory selected-file))
           (start-process root/mpv--process-name nil "mpv" (expand-file-name selected-file)))
-      (message "No file selected"))))
+      (message "No file selected."))))
 
 (defun root/playerctl-title ()
   "Fetch the currently playing media title using playerctl.
@@ -94,7 +94,7 @@ Returns a message if no player is active."
   (interactive)
   (let ((title (shell-command-to-string "playerctl metadata --format '{{title}}' 2>/dev/null")))
     (if (string-empty-p (string-trim title))
-        (message "No media playing")
+        (message "No media playing.")
       (message "Now playing: %s" (string-trim title)))))
 
 (defun root/playerctl-stop ()
@@ -102,16 +102,16 @@ Returns a message if no player is active."
   (interactive)
   (let ((output (shell-command-to-string "playerctl stop")))
     (if (string-empty-p (string-trim output))
-        (message "Player stopped")
-      (message "No media playing"))))
+        (message "Player stopped.")
+      (message "No media playing."))))
 
 (defun root/playerctl-play-pause ()
   "Play or pause the current media player using playerctl."
   (interactive)
   (let ((output (shell-command-to-string "playerctl play-pause")))
     (if (string-empty-p (string-trim output))
-        (message "Player paused")
-      (message "No media playing"))))
+        (message "Player paused.")
+      (message "No media playing."))))
 
 (defun root/playerctl-mpv-command (args)
   "Helper to run playerctl commands for mpv with ARGS."
@@ -130,7 +130,7 @@ found, it attempts to stop an external instance via
          (delete-process root/mpv--process-name)
          (message "Mpv stopped."))
         ((string-empty-p (string-trim (root/playerctl-mpv-command "stop")))
-         (message "Mpv stopped"))
+         (message "Mpv stopped."))
     (t (message "No mpv process is running."))))
 
 (defun root/mpv-play-pause ()
@@ -138,7 +138,7 @@ found, it attempts to stop an external instance via
   (interactive)
   (let ((output (root/playerctl-mpv-command "play-pause")))
     (if (string-empty-p (string-trim output))
-        (message "Mpv paused")
-      (message "No media playing"))))
+        (message "Mpv paused.")
+      (message "No media playing."))))
 
 (provide 'root-fn-media-playback)
