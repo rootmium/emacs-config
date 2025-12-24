@@ -9,6 +9,9 @@
   :type 'directory
   :group 'root/custom)
 
+(defvar root/mpv--process-name "mpv-player"
+  "Internal name used for mpv process.")
+
 (defun root/get-mpv-volume ()
   "Return the current mpv volume as in integer.
 
