@@ -92,6 +92,20 @@ before starting the new one."
           (make-comint-in-buffer root/mpv--process-name root/mpv--buffer-name "mpv" nil (expand-file-name selected-file)))
       (message "No file selected."))))
 
+(defun root/mpv-play-url (url)
+  "Play the specified URL using mpv.
+
+If URL is non empty, then stop any existing mpv process with `root/mpv-stop'
+and start a new process to play the URL."
+  (interactive "sURL: ")
+  (if (string-empty-p url)
+      (message "No URL specified.")
+    (progn
+      (root/mpv-stop)
+      (message "Playing URL")
+      (make-comint-in-buffer root/mpv--process-name root/mpv--buffer-name "mpv" nil url)
+      )))
+
 (defun root/playerctl-title ()
   "Fetch the currently playing media title using playerctl.
 
