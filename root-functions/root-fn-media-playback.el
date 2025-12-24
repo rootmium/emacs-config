@@ -58,17 +58,6 @@ This function performs two actions:
     (shell-command (concat "playerctl --player=mpv volume " float-vol))
     (message "Mpv volume set to %d (config and playerctl)" volume)))
 
-  "Stop the running mpv process if it exists.
-
-This function checks for a process named `root/mpv--process-name'
-and deletes it if found."
-  (interactive)
-  (if (get-process root/mpv--process-name)
-      (progn
-        (delete-process root/mpv--process-name)
-        (message "Mpv stopped."))
-    (message "No mpv process is running.")))
-
 (defun root/mpv-shuffle-dir (dir)
   "Launch mpv in a comint buffer to play files in DIR in shuffle mode.
 
@@ -130,6 +119,20 @@ Returns a message if no player is active."
     (shell-command-to-string cmd)))
 
 (defun root/mpv-stop ()
+  "Stop the running mpv process and clear any active playback.
+
+This function first attempts to finds and delete an internal Emacs
+process named `root/mpv--process-name'. If no internal process is
+found, it attempts to stop an external instance via
+`root/playerctl-mpv-command'."
+  (interactive)
+  (cond ((get-process root/mpv--process-name)
+         (delete-process root/mpv--process-name)
+         (message "Mpv stopped."))
+        ((string-empty-p (string-trim (root/playerctl-mpv-command "stop")))
+         (message "Mpv stopped"))
+    (t (message "No mpv process is running."))))
+
   (interactive)
 
 (provide 'root-fn-media-playback)
