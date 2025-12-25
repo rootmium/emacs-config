@@ -7,6 +7,7 @@
 (require 'root-fn-miscellaneous)
 (require 'root-fn-aria2)
 (require 'root-fn-media-playback)
+(require 'root-fn-yt-dlp)
 
 ;; Load modules
 (add-to-list 'load-path "~/.config/emacs/root-modules")
