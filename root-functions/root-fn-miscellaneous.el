@@ -64,4 +64,12 @@ With a prefix argument N, make N copies."
           (newline)
           (insert text))))))
 
+(defun root/indent-clean-buffer ()
+  "Indent the entire buffer and clean up whitespace."
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max))
+    (delete-trailing-whitespace)
+    (message "Buffer indented and whitespace cleaned.")))
+
 (provide 'root-fn-miscellaneous)
