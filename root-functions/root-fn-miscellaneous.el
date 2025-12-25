@@ -49,4 +49,19 @@ expiration, and messages the resulting URL upon completion."
     (process-put (get-process "0x0-upload") :output-buffer process-buffer)
     nil))
 
+(defun root/duplicate-line-or-region (&optional n)
+  "Duplicate the current line or active region.
+
+With a prefix argument N, make N copies."
+  (interactive "p")
+  (let ((use-region (use-region-p)))
+    (save-excursion
+      (let ((text (if use-region
+                      (buffer-substring (region-beginning) (region-end))
+                    (filter-buffer-substring (line-beginning-position) (line-end-position)))))
+        (dotimes (_ (or n 1))
+          (goto-char (if use-region (region-end) (line-end-position)))
+          (newline)
+          (insert text))))))
+
 (provide 'root-fn-miscellaneous)
