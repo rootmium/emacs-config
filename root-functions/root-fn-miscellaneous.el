@@ -89,4 +89,13 @@ With a prefix argument N, make N copies."
           (message "File %s successfully renamed to %s"
                    name (file-name-nondirectory new-name)))))))
 
+(defun root/sudo-edit-current-file ()
+  "Re-open the current file as root using TRAMP."
+  (interactive)
+  (let ((pos (point)))
+    (if (buffer-file-name)
+        (find-alternate-file (concat "/sudo::" (buffer-file-name)))
+      (error "Current buffer is not visiting a file!"))
+    (goto-char pos)))
+
 (provide 'root-fn-miscellaneous)
