@@ -72,4 +72,21 @@ With a prefix argument N, make N copies."
     (delete-trailing-whitespace)
     (message "Buffer indented and whitespace cleaned.")))
 
+(defun root/rename-file-and-buffer ()
+  "Rename current buffer and file it is visiting."
+  (interactive)
+  (let ((name (buffer-name))
+        (file-name (buffer-file-name)))
+    (if (not (buffer-file-name))
+        (error "Current buffer is not visiting a file!" name)
+      (let ((new-name (read-file-name "New name: " file-name)))
+        (if (get-buffer new-name)
+            (error "A buffer named %s already exists!" new-name)
+          (rename-file file-name new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil)
+          (message "File %s successfully renamed to %s"
+                   name (file-name-nondirectory new-name)))))))
+
 (provide 'root-fn-miscellaneous)
