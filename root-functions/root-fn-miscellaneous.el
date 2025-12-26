@@ -98,4 +98,11 @@ With a prefix argument N, make N copies."
       (error "Current buffer is not visiting a file!"))
     (goto-char pos)))
 
+(defun root/kill-current-line ()
+  "Copy the current line to the kill-ring."
+  (interactive)
+  (save-excursion
+    (kill-new (buffer-substring (line-beginning-position) (line-end-position))))
+  (message "Line copied."))
+
 (provide 'root-fn-miscellaneous)

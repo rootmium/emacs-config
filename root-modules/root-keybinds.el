@@ -8,6 +8,7 @@
                     "C-c b" 'ibuffer
                     "C-c e d" 'root/duplicate-line-or-region
                     "C-c e f" 'root/indent-clean-buffer
+                    "C-c e e" 'root/kill-current-line
                     )
 
 (provide 'root-keybinds)
